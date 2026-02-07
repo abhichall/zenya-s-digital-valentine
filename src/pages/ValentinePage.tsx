@@ -147,64 +147,52 @@ const ValentinePage = () => {
           </>
         ) : (
           <div className="animate-fade-in-up">
-            {/* Header */}
-            <div className="text-center mb-8">
-              <Heart className="w-16 h-16 mx-auto text-primary fill-primary animate-pulse-heart mb-4" />
-              <h1 className="text-4xl md:text-6xl font-display font-semibold text-foreground">
-                Yay! 🎉💕
-              </h1>
+            {/* Two column layout */}
+            <div className="grid md:grid-cols-2 gap-8 items-center min-h-[500px]">
+              {/* Left side - Yay and Message */}
+              <div className="text-center md:text-left">
+                <Heart className="w-16 h-16 mx-auto md:mx-0 text-primary fill-primary animate-pulse-heart mb-4" />
+                <h1 className="text-4xl md:text-6xl font-display font-semibold text-foreground mb-6">
+                  Yay! 🎉💕
+                </h1>
+                
+                <div className="romantic-card">
+                  <p className="text-xl md:text-2xl text-foreground font-body leading-relaxed">
+                    You just made me the happiest person in the world! 
+                    I can't wait to celebrate this Valentine's Day with you, 
+                    even if it's from miles away.
+                  </p>
+                  <p className="text-lg text-primary font-display mt-6">
+                    I love you, Zenya! 💗
+                  </p>
+                  <p className="text-muted-foreground font-body italic mt-4">
+                    Forever yours ∞
+                  </p>
+                </div>
+              </div>
+
+              {/* Right side - Large image placeholder */}
+              <div className="flex items-center justify-center">
+                <div className="w-full aspect-[3/4] max-w-sm rounded-3xl bg-secondary border-4 border-dashed border-primary/30 flex items-center justify-center overflow-hidden shadow-romantic">
+                  {/* Replace this placeholder with your actual image */}
+                  {/* <img src="/your-couple-photo.jpg" alt="Us" className="w-full h-full object-cover" /> */}
+                  
+                  <div className="text-center p-8">
+                    <Heart className="w-12 h-12 mx-auto text-primary/40 mb-4" />
+                    <p className="text-muted-foreground font-body">
+                      Your photo goes here 💕
+                    </p>
+                    <p className="text-sm text-muted-foreground/70 mt-2 font-body">
+                      Add a picture of you two
+                    </p>
+                  </div>
+                </div>
+              </div>
             </div>
 
-            {/* Two column layout */}
-            <div className="grid md:grid-cols-2 gap-8 items-center">
-              {/* Left side - Message */}
-              <div className="romantic-card">
-                <p className="text-xl md:text-2xl text-foreground font-body leading-relaxed">
-                  You just made me the happiest person in the world! 
-                  I can't wait to celebrate this Valentine's Day with you, 
-                  even if it's from miles away.
-                </p>
-                <p className="text-lg text-primary font-display mt-6">
-                  I love you, Zenya! 💗
-                </p>
-                <p className="text-muted-foreground font-body italic mt-4">
-                  Forever yours ∞
-                </p>
-              </div>
-
-              {/* Right side - Card deck photos */}
-              <div className="relative h-80 md:h-96 flex items-center justify-center">
-                <div className="relative w-48 h-64 md:w-56 md:h-72">
-                  {deckPhotos.map((photo, index) => (
-                    <div
-                      key={index}
-                      className="absolute inset-0 rounded-xl overflow-hidden shadow-romantic transition-all duration-500 hover:scale-105 hover:z-50 cursor-pointer"
-                      style={{
-                        transform: `rotate(${photo.rotation}deg) translate(${photo.offset.x}px, ${photo.offset.y}px)`,
-                        zIndex: index,
-                        border: '4px solid white',
-                        boxShadow: '0 4px 20px rgba(0,0,0,0.15)',
-                      }}
-                    >
-                      <img
-                        src={photo.src}
-                        alt={`Memory ${index + 1}`}
-                        className="w-full h-full object-cover"
-                      />
-                      {/* Playing card corner decoration */}
-                      <div className="absolute top-2 left-2 text-primary text-lg font-display">
-                        ♥
-                      </div>
-                      <div className="absolute bottom-2 right-2 text-primary text-lg font-display rotate-180">
-                        ♥
-                      </div>
-                    </div>
-                  ))}
-                </div>
-                <p className="absolute -bottom-4 text-center text-sm text-muted-foreground font-body w-full">
-                  💕 Our memories together
-                </p>
-              </div>
+            {/* Back button */}
+            <div className="mt-8">
+              <NavigationButtons backPath="/letter" />
             </div>
           </div>
         )}
