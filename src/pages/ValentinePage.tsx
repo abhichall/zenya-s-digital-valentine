@@ -1,9 +1,23 @@
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef } from 'react';
 import PageWrapper from '@/components/PageWrapper';
 import NavigationButtons from '@/components/NavigationButtons';
 import valentineImage from '@/assets/valentine-final.jpg';
+import photo1 from '@/assets/photo-1.jpg';
+import photo2 from '@/assets/photo-2.jpg';
+import photo3 from '@/assets/photo-3.jpg';
+import photo4 from '@/assets/photo-4.jpg';
+import photo5 from '@/assets/photo-5.jpg';
 import confetti from 'canvas-confetti';
 import { Heart } from 'lucide-react';
+
+// Card deck photos - replace with your couple photos
+const deckPhotos = [
+  { src: photo1, rotation: -12, offset: { x: -20, y: 10 } },
+  { src: photo2, rotation: -6, offset: { x: -10, y: -5 } },
+  { src: photo3, rotation: 0, offset: { x: 0, y: 0 } },
+  { src: photo4, rotation: 6, offset: { x: 10, y: -5 } },
+  { src: photo5, rotation: 12, offset: { x: 20, y: 10 } },
+];
 
 const ValentinePage = () => {
   const [answered, setAnswered] = useState(false);
@@ -86,7 +100,7 @@ const ValentinePage = () => {
 
   return (
     <PageWrapper>
-      <div ref={containerRef} className="max-w-2xl mx-auto w-full relative min-h-[600px]">
+      <div ref={containerRef} className="max-w-5xl mx-auto w-full relative min-h-[600px]">
         {!answered ? (
           <>
             <div className="text-center mb-8 animate-fade-in-up">
@@ -126,37 +140,72 @@ const ValentinePage = () => {
                 {noTexts[Math.min(noClickCount, noTexts.length - 1)]}
               </button>
             </div>
+
+            <div className="mt-8">
+              <NavigationButtons backPath="/letter" />
+            </div>
           </>
         ) : (
-          <div className="text-center animate-fade-in-up">
-            <div className="mb-8">
-              <Heart className="w-24 h-24 mx-auto text-primary fill-primary animate-pulse-heart" />
+          <div className="animate-fade-in-up">
+            {/* Header */}
+            <div className="text-center mb-8">
+              <Heart className="w-16 h-16 mx-auto text-primary fill-primary animate-pulse-heart mb-4" />
+              <h1 className="text-4xl md:text-6xl font-display font-semibold text-foreground">
+                Yay! 🎉💕
+              </h1>
             </div>
 
-            <h1 className="text-4xl md:text-6xl font-display font-semibold text-foreground mb-6">
-              Yay! 🎉💕
-            </h1>
+            {/* Two column layout */}
+            <div className="grid md:grid-cols-2 gap-8 items-center">
+              {/* Left side - Message */}
+              <div className="romantic-card">
+                <p className="text-xl md:text-2xl text-foreground font-body leading-relaxed">
+                  You just made me the happiest person in the world! 
+                  I can't wait to celebrate this Valentine's Day with you, 
+                  even if it's from miles away.
+                </p>
+                <p className="text-lg text-primary font-display mt-6">
+                  I love you, Zenya! 💗
+                </p>
+                <p className="text-muted-foreground font-body italic mt-4">
+                  Forever yours ∞
+                </p>
+              </div>
 
-            <div className="romantic-card mb-8">
-              <p className="text-xl md:text-2xl text-foreground font-body leading-relaxed">
-                You just made me the happiest person in the world! 
-                I can't wait to celebrate this Valentine's Day with you, 
-                even if it's from miles away.
-              </p>
-              <p className="text-lg text-primary font-display mt-6">
-                I love you, Zenya! 💗
-              </p>
+              {/* Right side - Card deck photos */}
+              <div className="relative h-80 md:h-96 flex items-center justify-center">
+                <div className="relative w-48 h-64 md:w-56 md:h-72">
+                  {deckPhotos.map((photo, index) => (
+                    <div
+                      key={index}
+                      className="absolute inset-0 rounded-xl overflow-hidden shadow-romantic transition-all duration-500 hover:scale-105 hover:z-50 cursor-pointer"
+                      style={{
+                        transform: `rotate(${photo.rotation}deg) translate(${photo.offset.x}px, ${photo.offset.y}px)`,
+                        zIndex: index,
+                        border: '4px solid white',
+                        boxShadow: '0 4px 20px rgba(0,0,0,0.15)',
+                      }}
+                    >
+                      <img
+                        src={photo.src}
+                        alt={`Memory ${index + 1}`}
+                        className="w-full h-full object-cover"
+                      />
+                      {/* Playing card corner decoration */}
+                      <div className="absolute top-2 left-2 text-primary text-lg font-display">
+                        ♥
+                      </div>
+                      <div className="absolute bottom-2 right-2 text-primary text-lg font-display rotate-180">
+                        ♥
+                      </div>
+                    </div>
+                  ))}
+                </div>
+                <p className="absolute -bottom-4 text-center text-sm text-muted-foreground font-body w-full">
+                  💕 Our memories together
+                </p>
+              </div>
             </div>
-
-            <p className="text-muted-foreground font-body italic">
-              Forever yours ∞
-            </p>
-          </div>
-        )}
-
-        {!answered && (
-          <div className="mt-8">
-            <NavigationButtons backPath="/letter" />
           </div>
         )}
       </div>
