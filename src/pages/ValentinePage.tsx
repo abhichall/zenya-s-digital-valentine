@@ -117,10 +117,10 @@ const ValentinePage = () => {
               </div>
 
               <h1 className="text-4xl md:text-5xl font-display font-semibold text-foreground mb-4">
-                Will you be my Valentine, Zenya? 💘
+                will you be my valentine, zenya?
               </h1>
               <p className="text-muted-foreground font-body mb-8">
-                I&apos;ve been waiting to ask you this...
+                try to click no
               </p>
             </div>
 
@@ -129,7 +129,7 @@ const ValentinePage = () => {
                 onClick={handleYesClick}
                 className="romantic-button text-xl px-12 py-5 animate-pulse-heart"
               >
-                Yes 💞
+                Yea
               </button>
 
               <button
