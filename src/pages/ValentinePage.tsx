@@ -28,15 +28,12 @@ const ValentinePage = () => {
   const containerRef = useRef<HTMLDivElement>(null);
 
   const noTexts = [
-    "No 😶",
+    "No.....",
     "Are you sure?",
     "Really sure?",
     "Think again!",
     "Last chance!",
     "Surely not?",
-    "You're breaking my heart 💔",
-    "I'm gonna cry...",
-    "Okay fine, YES it is! 💕",
   ];
 
   const handleYesClick = () => {

@@ -9,7 +9,7 @@ const VideoPage1 = () => {
       <div className="max-w-3xl mx-auto w-full">
         <div className="text-center mb-8 animate-fade-in-up">
           <h2 className="text-3xl md:text-4xl font-display font-semibold text-foreground mb-4">
-            One of my favorite videos of us 🎬
+            a little flashback to reminisce🎬
           </h2>
           <p className="text-muted-foreground font-body">
             Every moment with you is worth replaying
