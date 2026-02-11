@@ -1,14 +1,15 @@
-import { useState, useRef } from 'react';
-import PageWrapper from '@/components/PageWrapper';
-import NavigationButtons from '@/components/NavigationButtons';
-import valentineImage from '@/assets/valentine-final.jpg';
-import photo1 from '@/assets/photo-1.jpg';
-import photo2 from '@/assets/photo-2.jpg';
-import photo3 from '@/assets/photo-3.jpg';
-import photo4 from '@/assets/photo-4.jpg';
-import photo5 from '@/assets/photo-5.jpg';
-import confetti from 'canvas-confetti';
-import { Heart } from 'lucide-react';
+import { useState, useRef } from "react";
+import PageWrapper from "@/components/PageWrapper";
+import NavigationButtons from "@/components/NavigationButtons";
+import valentineImage from "@/assets/valentine-final.jpg";
+import photo1 from "@/assets/photo-1.jpg";
+import photo2 from "@/assets/photo-2.jpg";
+import photo3 from "@/assets/photo-3.jpg";
+import photo4 from "@/assets/photo-4.jpg";
+import photo5 from "@/assets/photo-5.jpg";
+import confetti from "canvas-confetti";
+import vdayImage from "@/assets/vday.png";
+import { Heart } from "lucide-react";
 
 // Card deck photos - replace with your couple photos
 const deckPhotos = [
@@ -35,24 +36,26 @@ const ValentinePage = () => {
     "Surely not?",
     "You're breaking my heart 💔",
     "I'm gonna cry...",
-    "Okay fine, YES it is! 💕"
+    "Okay fine, YES it is! 💕",
   ];
 
   const handleYesClick = () => {
     setAnswered(true);
-    
+
     // Trigger confetti celebration
     const duration = 5 * 1000;
     const animationEnd = Date.now() + duration;
     const defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 100 };
 
-    const randomInRange = (min: number, max: number) => Math.random() * (max - min) + min;
+    const randomInRange = (min: number, max: number) =>
+      Math.random() * (max - min) + min;
 
     const interval = setInterval(() => {
       const timeLeft = animationEnd - Date.now();
 
       if (timeLeft <= 0) {
-        return clearInterval(interval);
+        clearInterval(interval);
+        return;
       }
 
       const particleCount = 50 * (timeLeft / duration);
@@ -61,34 +64,35 @@ const ValentinePage = () => {
         ...defaults,
         particleCount,
         origin: { x: randomInRange(0.1, 0.3), y: Math.random() - 0.2 },
-        colors: ['#ff69b4', '#ff1493', '#ffb6c1', '#ffc0cb', '#ff85a2'],
+        colors: ["#ff69b4", "#ff1493", "#ffb6c1", "#ffc0cb", "#ff85a2"],
       });
+
       confetti({
         ...defaults,
         particleCount,
         origin: { x: randomInRange(0.7, 0.9), y: Math.random() - 0.2 },
-        colors: ['#ff69b4', '#ff1493', '#ffb6c1', '#ffc0cb', '#ff85a2'],
+        colors: ["#ff69b4", "#ff1493", "#ffb6c1", "#ffc0cb", "#ff85a2"],
       });
     }, 250);
   };
 
   const handleNoHover = () => {
     if (!containerRef.current || !noButtonRef.current) return;
-    
+
     const container = containerRef.current.getBoundingClientRect();
     const button = noButtonRef.current.getBoundingClientRect();
-    
+
     const maxX = container.width - button.width - 20;
     const maxY = container.height - button.height - 20;
-    
+
     const newX = Math.random() * maxX - maxX / 2;
     const newY = Math.random() * maxY - maxY / 2;
-    
+
     setNoButtonPosition({ x: newX, y: newY });
   };
 
   const handleNoClick = () => {
-    setNoClickCount(prev => {
+    setNoClickCount((prev) => {
       const next = prev + 1;
       if (next >= noTexts.length - 1) {
         handleYesClick();
@@ -100,7 +104,10 @@ const ValentinePage = () => {
 
   return (
     <PageWrapper>
-      <div ref={containerRef} className="max-w-5xl mx-auto w-full relative min-h-[600px]">
+      <div
+        ref={containerRef}
+        className="max-w-5xl mx-auto w-full relative min-h-[600px]"
+      >
         {!answered ? (
           <>
             <div className="text-center mb-8 animate-fade-in-up">
@@ -116,7 +123,7 @@ const ValentinePage = () => {
                 Will you be my Valentine, Zenya? 💘
               </h1>
               <p className="text-muted-foreground font-body mb-8">
-                I've been waiting to ask you this...
+                I&apos;ve been waiting to ask you this...
               </p>
             </div>
 
@@ -153,39 +160,29 @@ const ValentinePage = () => {
               <div className="text-center md:text-left">
                 <Heart className="w-16 h-16 mx-auto md:mx-0 text-primary fill-primary animate-pulse-heart mb-4" />
                 <h1 className="text-4xl md:text-6xl font-display font-semibold text-foreground mb-6">
-                  Yay! 🎉💕
+                  nice
                 </h1>
-                
+
                 <div className="romantic-card">
                   <p className="text-xl md:text-2xl text-foreground font-body leading-relaxed">
-                    You just made me the happiest person in the world! 
-                    I can't wait to celebrate this Valentine's Day with you, 
-                    even if it's from miles away.
+                    i mean this is expected. idk what the point of asking you
+                    was. but ik, this is pretty sick
                   </p>
-                  <p className="text-lg text-primary font-display mt-6">
-                    I love you, Zenya! 💗
-                  </p>
+
                   <p className="text-muted-foreground font-body italic mt-4">
-                    Forever yours ∞
+                    to many more valentines and memories. see you in a month
                   </p>
                 </div>
               </div>
 
-              {/* Right side - Large image placeholder */}
-              <div className="flex items-center justify-center">
-                <div className="w-full aspect-[3/4] max-w-sm rounded-3xl bg-secondary border-4 border-dashed border-primary/30 flex items-center justify-center overflow-hidden shadow-romantic">
-                  {/* Replace this placeholder with your actual image */}
-                  {/* <img src="/your-couple-photo.jpg" alt="Us" className="w-full h-full object-cover" /> */}
-                  
-                  <div className="text-center p-8">
-                    <Heart className="w-12 h-12 mx-auto text-primary/40 mb-4" />
-                    <p className="text-muted-foreground font-body">
-                      Your photo goes here 💕
-                    </p>
-                    <p className="text-sm text-muted-foreground/70 mt-2 font-body">
-                      Add a picture of you two
-                    </p>
-                  </div>
+              {/* Right side - Image */}
+              <div className="flex items-center justify-center md:justify-end">
+                <div className="w-full aspect-[3/4] max-w-lg translate-x-4 md:translate-x-10 rounded-3xl bg-secondary border-4 border-dashed border-primary/30 overflow-hidden shadow-romantic">
+                  <img
+                    src={vdayImage}
+                    alt="Us"
+                    className="w-full h-full object-cover"
+                  />
                 </div>
               </div>
             </div>
